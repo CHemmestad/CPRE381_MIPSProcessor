@@ -1,0 +1,301 @@
+/home/cihem/Desktop/Project1_New/tb_decoder.vhd {1 {vcom -work work -2008 -explicit -vopt -stats=none /home/cihem/Desktop/Project1_New/tb_decoder.vhd
+QuestaSim-64 vcom 2024.2 Compiler 2024.05 May 20 2024
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity tb_decoder
+-- Compiling architecture mixed of tb_decoder
+
+} {} {}} /home/cihem/Desktop/Project1_New/register_file.vhd {1 {vcom -work work -2008 -explicit -vopt -stats=none /home/cihem/Desktop/Project1_New/register_file.vhd
+QuestaSim-64 vcom 2024.2 Compiler 2024.05 May 20 2024
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity register_file
+-- Compiling architecture structural of register_file
+
+} {} {}} /home/cihem/Desktop/Project1_New/andg2.vhd {1 {vcom -work work -2008 -explicit -vopt -stats=none /home/cihem/Desktop/Project1_New/andg2.vhd
+QuestaSim-64 vcom 2024.2 Compiler 2024.05 May 20 2024
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity andg2
+-- Compiling architecture dataflow of andg2
+
+} {} {}} /home/cihem/Desktop/Project1_New/invg.vhd {1 {vcom -work work -2008 -explicit -vopt -stats=none /home/cihem/Desktop/Project1_New/invg.vhd
+QuestaSim-64 vcom 2024.2 Compiler 2024.05 May 20 2024
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity invg
+-- Compiling architecture dataflow of invg
+
+} {} {}} /home/cihem/Desktop/Project1_New/tb_control.vhd {1 {vcom -work work -2008 -explicit -vopt -stats=none /home/cihem/Desktop/Project1_New/tb_control.vhd
+QuestaSim-64 vcom 2024.2 Compiler 2024.05 May 20 2024
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity tb_control
+-- Compiling architecture behavior of tb_control
+
+} {} {}} /home/cihem/Desktop/Project1_New/mux2t1_N.vhd {1 {vcom -work work -2008 -explicit -vopt -stats=none /home/cihem/Desktop/Project1_New/mux2t1_N.vhd
+QuestaSim-64 vcom 2024.2 Compiler 2024.05 May 20 2024
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity mux2t1_N
+-- Compiling architecture structural of mux2t1_N
+
+} {} {}} /home/cihem/Desktop/Project1_New/AdderWithMux.vhd {1 {vcom -work work -2008 -explicit -vopt -stats=none /home/cihem/Desktop/Project1_New/AdderWithMux.vhd
+QuestaSim-64 vcom 2024.2 Compiler 2024.05 May 20 2024
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity AdderWithMux
+-- Compiling architecture structure of AdderWithMux
+
+} {} {}} /home/cihem/Desktop/Project1_New/bitExtender.vhd {1 {vcom -work work -2008 -explicit -vopt -stats=none /home/cihem/Desktop/Project1_New/bitExtender.vhd
+QuestaSim-64 vcom 2024.2 Compiler 2024.05 May 20 2024
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity bitExtender
+-- Compiling architecture dataflow of bitExtender
+
+} {} {}} /home/cihem/Desktop/Project1_New/tb_register_n.vhd {1 {vcom -work work -2008 -explicit -vopt -stats=none /home/cihem/Desktop/Project1_New/tb_register_n.vhd
+QuestaSim-64 vcom 2024.2 Compiler 2024.05 May 20 2024
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity tb_register_n
+-- Compiling architecture mixed of tb_register_n
+
+} {} {}} /home/cihem/Desktop/Project1_New/tb_ALU.vhd {1 {vcom -work work -2008 -explicit -vopt -stats=none /home/cihem/Desktop/Project1_New/tb_ALU.vhd
+QuestaSim-64 vcom 2024.2 Compiler 2024.05 May 20 2024
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity tb_ALU
+-- Compiling architecture behavior of tb_ALU
+
+} {} {}} /home/cihem/Desktop/Project1_New/mux32_1.vhd {1 {vcom -work work -2008 -explicit -vopt -stats=none /home/cihem/Desktop/Project1_New/mux32_1.vhd
+QuestaSim-64 vcom 2024.2 Compiler 2024.05 May 20 2024
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity mux32t1
+-- Compiling architecture structure of mux32t1
+
+} {} {}} /home/cihem/Desktop/Project1_New/mem.vhd {1 {vcom -work work -2008 -explicit -vopt -stats=none /home/cihem/Desktop/Project1_New/mem.vhd
+QuestaSim-64 vcom 2024.2 Compiler 2024.05 May 20 2024
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity mem
+-- Compiling architecture rtl of mem
+
+} {} {}} /home/cihem/Desktop/Project1_New/norg2.vhd {1 {vcom -work work -2008 -explicit -vopt -stats=none /home/cihem/Desktop/Project1_New/norg2.vhd
+QuestaSim-64 vcom 2024.2 Compiler 2024.05 May 20 2024
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity norg2
+-- Compiling architecture dataflow of norg2
+
+} {} {}} /home/cihem/Desktop/Project1_New/MIPSDataPath1.vhd {1 {vcom -work work -2008 -explicit -vopt -stats=none /home/cihem/Desktop/Project1_New/MIPSDataPath1.vhd
+QuestaSim-64 vcom 2024.2 Compiler 2024.05 May 20 2024
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity MIPSDataPath1
+-- Compiling architecture structure of MIPSDataPath1
+
+} {} {}} /home/cihem/Desktop/Project1_New/OnesComplement.vhd {1 {vcom -work work -2008 -explicit -vopt -stats=none /home/cihem/Desktop/Project1_New/OnesComplement.vhd
+QuestaSim-64 vcom 2024.2 Compiler 2024.05 May 20 2024
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity onesComp_N
+-- Compiling architecture structure of onesComp_N
+
+} {} {}} /home/cihem/Desktop/Project1_New/tb_register_file.vhd {1 {vcom -work work -2008 -explicit -vopt -stats=none /home/cihem/Desktop/Project1_New/tb_register_file.vhd
+QuestaSim-64 vcom 2024.2 Compiler 2024.05 May 20 2024
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity tb_register_file
+-- Compiling architecture mixed of tb_register_file
+
+} {} {}} /home/cihem/Desktop/Project1_New/MIPSDataPath2.vhd {1 {vcom -work work -2008 -explicit -vopt -stats=none /home/cihem/Desktop/Project1_New/MIPSDataPath2.vhd
+QuestaSim-64 vcom 2024.2 Compiler 2024.05 May 20 2024
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity MIPSDataPath2
+-- Compiling architecture structure of MIPSDataPath2
+
+} {} {}} /home/cihem/Desktop/Project1_New/register_n.vhd {1 {vcom -work work -2008 -explicit -vopt -stats=none /home/cihem/Desktop/Project1_New/register_n.vhd
+QuestaSim-64 vcom 2024.2 Compiler 2024.05 May 20 2024
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity register_n
+-- Compiling architecture structural of register_n
+
+} {} {}} /home/cihem/Desktop/Project1_New/addSub.vhd {1 {vcom -work work -2008 -explicit -vopt -stats=none /home/cihem/Desktop/Project1_New/addSub.vhd
+QuestaSim-64 vcom 2024.2 Compiler 2024.05 May 20 2024
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity addSub_N
+-- Compiling architecture structural of addSub_N
+
+} {} {}} /home/cihem/Desktop/Project1_New/tb_bitExtender.vhd {1 {vcom -work work -2008 -explicit -vopt -stats=none /home/cihem/Desktop/Project1_New/tb_bitExtender.vhd
+QuestaSim-64 vcom 2024.2 Compiler 2024.05 May 20 2024
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity tb_bitExtender
+-- Compiling architecture mixed of tb_bitExtender
+
+} {} {}} /home/cihem/Desktop/Project1_New/tb_dffg.vhd {1 {vcom -work work -2008 -explicit -vopt -stats=none /home/cihem/Desktop/Project1_New/tb_dffg.vhd
+QuestaSim-64 vcom 2024.2 Compiler 2024.05 May 20 2024
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity tb_dffg
+-- Compiling architecture behavior of tb_dffg
+
+} {} {}} /home/cihem/Desktop/Project1_New/tb_mux32_1.vhd {1 {vcom -work work -2008 -explicit -vopt -stats=none /home/cihem/Desktop/Project1_New/tb_mux32_1.vhd
+QuestaSim-64 vcom 2024.2 Compiler 2024.05 May 20 2024
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity tb_mux32_1
+-- Compiling architecture mixed of tb_mux32_1
+
+} {} {}} /home/cihem/Desktop/Project1_New/barrelShifter.vhd {1 {vcom -work work -2008 -explicit -vopt -stats=none /home/cihem/Desktop/Project1_New/barrelShifter.vhd
+QuestaSim-64 vcom 2024.2 Compiler 2024.05 May 20 2024
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity barrelShifter
+-- Compiling architecture mixed of barrelShifter
+
+} {} {}} /home/cihem/Desktop/Project1_New/Adder_N.vhd {1 {vcom -work work -2008 -explicit -vopt -stats=none /home/cihem/Desktop/Project1_New/Adder_N.vhd
+QuestaSim-64 vcom 2024.2 Compiler 2024.05 May 20 2024
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity Adder_N
+-- Compiling architecture structural of Adder_N
+
+} {} {}} /home/cihem/Desktop/Project1_New/tb_fetchLogic.vhd {1 {vcom -work work -2008 -explicit -vopt -stats=none /home/cihem/Desktop/Project1_New/tb_fetchLogic.vhd
+QuestaSim-64 vcom 2024.2 Compiler 2024.05 May 20 2024
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity tb_fetchLogic
+-- Compiling architecture mixed of tb_fetchLogic
+
+} {} {}} /home/cihem/Desktop/Project1_New/decoder.vhd {1 {vcom -work work -2008 -explicit -vopt -stats=none /home/cihem/Desktop/Project1_New/decoder.vhd
+QuestaSim-64 vcom 2024.2 Compiler 2024.05 May 20 2024
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity decoder
+-- Compiling architecture structure of decoder
+
+} {} {}} /home/cihem/Desktop/Project1_New/tb_MIPSDataPath1.vhd {1 {vcom -work work -2008 -explicit -vopt -stats=none /home/cihem/Desktop/Project1_New/tb_MIPSDataPath1.vhd
+QuestaSim-64 vcom 2024.2 Compiler 2024.05 May 20 2024
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity tb_MIPSDataPath1
+-- Compiling architecture mixed of tb_MIPSDataPath1
+
+} {} {}} /home/cihem/Desktop/Project1_New/dffg.vhd {1 {vcom -work work -2008 -explicit -vopt -stats=none /home/cihem/Desktop/Project1_New/dffg.vhd
+QuestaSim-64 vcom 2024.2 Compiler 2024.05 May 20 2024
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity dffg
+-- Compiling architecture mixed of dffg
+
+} {} {}} /home/cihem/Desktop/Project1_New/tb_MIPSDataPath2.vhd {1 {vcom -work work -2008 -explicit -vopt -stats=none /home/cihem/Desktop/Project1_New/tb_MIPSDataPath2.vhd
+QuestaSim-64 vcom 2024.2 Compiler 2024.05 May 20 2024
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity tb_MIPSDataPath2
+-- Compiling architecture mixed of tb_MIPSDataPath2
+
+} {} {}} /home/cihem/Desktop/Project1_New/tb_dmem.vhd {1 {vcom -work work -2008 -explicit -vopt -stats=none /home/cihem/Desktop/Project1_New/tb_dmem.vhd
+QuestaSim-64 vcom 2024.2 Compiler 2024.05 May 20 2024
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity tb_dmem
+-- Compiling architecture mixed of tb_dmem
+
+} {} {}} /home/cihem/Desktop/Project1_New/fetchLogic.vhd {1 {vcom -work work -2008 -explicit -vopt -stats=none /home/cihem/Desktop/Project1_New/fetchLogic.vhd
+QuestaSim-64 vcom 2024.2 Compiler 2024.05 May 20 2024
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity fetchLogic
+-- Compiling architecture mixed of fetchLogic
+
+} {} {}} /home/cihem/Desktop/Project1_New/AdderStructural.vhd {1 {vcom -work work -2008 -explicit -vopt -stats=none /home/cihem/Desktop/Project1_New/AdderStructural.vhd
+QuestaSim-64 vcom 2024.2 Compiler 2024.05 May 20 2024
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity AdderStructural
+-- Compiling architecture structure of AdderStructural
+
+} {} {}} /home/cihem/Desktop/Project1_New/mux2t1.vhd {1 {vcom -work work -2008 -explicit -vopt -stats=none /home/cihem/Desktop/Project1_New/mux2t1.vhd
+QuestaSim-64 vcom 2024.2 Compiler 2024.05 May 20 2024
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity mux2t1
+-- Compiling architecture structure of mux2t1
+
+} {} {}} /home/cihem/Desktop/Project1_New/org2.vhd {1 {vcom -work work -2008 -explicit -vopt -stats=none /home/cihem/Desktop/Project1_New/org2.vhd
+QuestaSim-64 vcom 2024.2 Compiler 2024.05 May 20 2024
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity org2
+-- Compiling architecture dataflow of org2
+
+} {} {}} /home/cihem/Desktop/Project1_New/tb_barrelShifter.vhd {1 {vcom -work work -2008 -explicit -vopt -stats=none /home/cihem/Desktop/Project1_New/tb_barrelShifter.vhd
+QuestaSim-64 vcom 2024.2 Compiler 2024.05 May 20 2024
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_textio
+-- Loading package NUMERIC_STD
+-- Compiling entity tb_barrelShifter
+-- Compiling architecture mixed of tb_barrelShifter
+
+} {} {}} /home/cihem/Desktop/Project1_New/xorg2.vhd {1 {vcom -work work -2008 -explicit -vopt -stats=none /home/cihem/Desktop/Project1_New/xorg2.vhd
+QuestaSim-64 vcom 2024.2 Compiler 2024.05 May 20 2024
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity xorg2
+-- Compiling architecture dataflow of xorg2
+
+} {} {}} /home/cihem/Desktop/Project1_New/ALU.vhd {1 {vcom -work work -2008 -explicit -vopt -stats=none /home/cihem/Desktop/Project1_New/ALU.vhd
+QuestaSim-64 vcom 2024.2 Compiler 2024.05 May 20 2024
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity ALU
+-- Compiling architecture structural of ALU
+
+} {} {}}
