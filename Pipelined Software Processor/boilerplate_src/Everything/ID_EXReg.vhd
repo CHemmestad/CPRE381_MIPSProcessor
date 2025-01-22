@@ -1,0 +1,244 @@
+-- Susanna Shenouda
+-- Department of Electrical and Computer Engineering
+-- Iowa State University
+-------------------------------------------------------------------------
+
+
+-- ID_EXReg.vhd
+-------------------------------------------------------------------------
+-- DESCRIPTION: this file contains an implementation of a register for the 
+-- Instruction Decode/Instruction Execute Stage of the Pipeline Register
+--
+-- comment
+-- NOTES:
+-- 11/12/24 created
+-------------------------------------------------------------------------
+
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+
+
+entity ID_EXReg is
+  generic(N : integer := 32;
+	  D : integer := 5); -- Generic of type integer for input/output data width. Default value is 32.
+  port(
+	iClk		:in std_logic;
+	ireset		: in std_logic;
+	iEn		: in std_logic;
+	RegNumRs	: in std_logic_vector(4 downto 0);
+	RegNumRt	: in std_logic_vector(4 downto 0);
+	RegNumRd	: in std_logic_vector(4 downto 0);
+	RegRs		: in std_logic_vector(n-1 downto 0);
+	RegRt		: in std_logic_vector(n-1 downto 0);
+	RegRd		: in std_logic_vector(n-1 downto 0);
+	RegDst		: in std_logic;
+	RegWrite	: in std_logic;
+	MemWrite	: in std_logic;
+	MemtoReg	: in std_logic;
+	ALUCtrl		: in std_logic_vector(3 downto 0);
+	ALUSrc		: in std_logic;
+	SignExtn	: in std_logic_vector(n-1 downto 0);
+	nextPC		: in std_logic_vector(n-1 downto 0);
+	branch		: in std_logic;
+	iHalt		: in std_logic;
+	
+	
+	oRegWrite	: out std_logic;
+	oMemWrite	: out std_logic;
+	oMemtoReg	: out std_logic;
+	oRegDst		: out std_logic;
+	oALUCtrl	: out std_logic_vector(3 downto 0);
+	oALUSrc		: out std_logic;
+	oRegRd		: out std_logic_vector(n-1 downto 0);
+	oRegRs		: out std_logic_vector(n-1 downto 0);
+	oRegRt		: out std_logic_vector(n-1 downto 0);
+	oSignExtn	: out std_logic_vector(n-1 downto 0);
+	oRegNumRs	: out std_logic_vector(4 downto 0);
+	oRegNumRt	: out std_logic_vector(4 downto 0);
+	oRegNumRd	: out std_logic_vector(4 downto 0);
+	oNextPC		: out std_logic_vector(n-1 downto 0);
+	oBranch		: out std_logic;
+	oHalt		: out std_logic
+	);
+end ID_EXReg;
+
+
+architecture structural of ID_EXReg is 
+component dffg is
+	port(i_CLK        : in std_logic;     -- Clock input
+	 i_RST        : in std_logic;     -- Reset input
+	 i_WE         : in std_logic;     -- Write enable input
+	 i_D          : in std_logic;     -- Data value input
+	 o_Q          : out std_logic);   -- Data value output
+
+end component;
+
+component register_n is
+	port (
+		i_Clk			:in std_logic;
+		i_D			:in std_logic_vector(N-1 downto 0);
+		i_Rst			:in std_logic;
+		i_En			:in std_logic;
+		o_Q			:out std_logic_vector(N-1 downto 0));
+	end component;
+
+
+component register_5bit is
+	port(
+		i_Clk			:in std_logic;
+		i_D			:in std_logic_vector(D-1 downto 0);
+		i_Rst			:in std_logic;
+		i_En			:in std_logic;
+		o_Q			:out std_logic_vector(D-1 downto 0)
+		);
+	end component;
+
+begin
+
+
+	RegWritedff : dffg port map(
+
+				i_CLK => iClk,
+				i_RST => ireset,
+				i_WE  => iEn,
+				i_D   => RegWrite,
+				o_Q   => oRegWrite
+	);
+
+
+
+	MemWritedff : dffg port map(
+
+				i_CLK => iClk,
+				i_RST => ireset,
+				i_WE  => iEn,
+				i_D   => MemWrite,
+				o_Q   => oMemWrite
+	);
+	
+	MemtoRegdff : dffg port map(
+
+	i_CLK => iClk,
+	i_RST => ireset,
+	i_WE  => iEn,
+	i_D   => MemtoReg,
+	o_Q   => oMemtoReg
+);
+
+
+
+AluSrcdff : dffg port map(
+
+i_CLK => iClk,
+i_RST => ireset,
+i_WE  => iEn,
+i_D   => ALUSrc,
+o_Q   => oALUSrc
+);
+
+RegDstdff : dffg port map(
+
+i_CLK => iClk,
+i_RST => ireset,
+i_WE  => iEn,
+i_D   => RegDst,
+o_Q   => oRegDst
+);
+
+HALT : dffg port map(
+
+i_CLK => iClk,
+i_RST => ireset,
+i_WE  => iEn,
+i_D   => iHalt,
+o_Q   => oHalt
+);
+
+gBRANCH : dffg port map(
+
+i_CLK => iClk,
+i_RST => ireset,
+i_WE  => iEn,
+i_D   => branch,
+o_Q   => oBranch
+);
+
+		NEXT_PC: register_n port map (
+		i_Clk	=> iClk,
+		i_D		=> nextPC,
+		i_Rst	=> ireset,
+		i_En	=> iEn,
+		o_Q		=> oNextPC
+		);
+
+ALUCtrldff : for i in 0 to 3 generate
+
+ALUCtrl_inst : dffg port map(
+	
+			i_CLK => iClk,
+			i_RST => ireset,
+			i_WE  => iEn,
+			i_D   => ALUCtrl(i),
+			o_Q   => oALUCtrl(i));
+		end generate;
+
+
+
+RegRsreg: register_5bit port map(
+
+
+		i_Clk	=> iClk,
+		i_D		=> RegNumRs,
+		i_Rst	=> ireset,
+		i_En	=> iEn,
+		o_Q		=> oRegNumRs
+		);
+
+
+		RegRtreg: register_5bit port map(
+
+
+		i_Clk	=> iClk,
+		i_D		=> RegNumRt,
+		i_Rst	=> ireset,
+		i_En	=> iEn,
+		o_Q		=> oRegNumRt
+		);
+
+		RegRdreg: register_5bit port map(
+
+
+		i_Clk	=> iClk,
+		i_D		=> RegNumRd,
+		i_Rst	=> ireset,
+		i_En	=> iEn,
+		o_Q		=> oRegNumRd
+		);
+
+		RegValRs: register_n port map (
+		i_Clk	=> iClk,
+		i_D		=> RegRs,
+		i_Rst	=> ireset,
+		i_En	=> iEn,
+		o_Q		=> oRegRs
+		);
+			
+		RegValRt: register_n port map (
+		i_Clk	=> iClk,
+		i_D		=> RegRt,
+		i_Rst	=> ireset,
+		i_En	=> iEn,
+		o_Q		=> oRegRt
+		);
+
+
+		RegValRd: register_n port map (
+		i_Clk	=> iClk,
+		i_D		=> RegRd,
+		i_Rst	=> ireset,
+		i_En	=> iEn,
+		o_Q		=> oRegRd
+		);
+
+		end structural;
