@@ -1,0 +1,467 @@
+-- Susanna Shenouda
+-- Department of Electrical and Computer Engineering
+-- Iowa State University
+-------------------------------------------------------------------------
+
+-- ALU.vhd
+-------------------------------------------------------------------------
+-- DESCRIPTION: This file contains an implementation of the Arithemtic Logic Unit using Structural VHDL
+
+-- 10/20/2024 by SES::Design created.
+-------------------------------------------------------------------------
+
+
+library IEEE;
+use IEEE.std_logic_1164.all;
+
+
+entity ALU is
+  port(
+        iA              :in std_logic_vector(31 downto 0);
+	iB		:in std_logic_vector(31 downto 0);
+	iImmediate	:in std_logic_vector(31 downto 0);
+	iALUOp		:in std_logic_vector(3 downto 0);
+	iALUsrc		:in std_logic;
+	ioverflowr   : in std_logic;
+	ioverflowi  : in std_logic;
+	iShamt		:in std_logic_vector(4 downto 0);
+	
+	outF		:out std_logic_vector(31 downto 0);
+	oCarryout	:out std_logic;
+	oOverflow	:out std_logic;
+	oZero		:out std_logic
+	);
+end ALU;
+
+architecture structural of ALU is
+
+component addSub_N
+  port(i_Ain			:in std_logic_vector;
+	i_Bin			:in std_logic_vector;
+	i_nAdd_Sub		:in std_logic;
+	o_Sum			:out std_logic_vector;
+	o_Cout			:out std_logic;
+	o_ovrflw		:out std_logic
+	);
+end component;
+
+component andg2 is
+  port(
+	i_A          : in std_logic;
+       i_B          : in std_logic;
+       o_F          : out std_logic
+	);
+end component;
+
+
+component org2 is
+  port(
+	i_A          : in std_logic;
+       i_B          : in std_logic;
+       o_F          : out std_logic
+	);
+end component;
+
+
+component xorg2 is
+  port(
+	i_A          : in std_logic;
+       i_B          : in std_logic;
+       o_F          : out std_logic
+	);
+end component;
+
+
+component norg2 is
+  port(
+	i_A          : in std_logic;
+       i_B          : in std_logic;
+       o_F          : out std_logic
+	);
+end component;
+
+component barrelShifter is
+  port(
+	shiftDirection     	: in std_logic;		-- if shiftDirection is 0: shift left, if shiftDirection is 1: shift right
+	shiftType		: in std_logic;		-- if shiftType is 0: type is logical, if shift type is 1: type is arithmetic
+	dataInput		: in std_logic_vector(31 downto 0);
+	shamt			: in std_logic_vector(4 downto 0);
+	dataOutput		: out std_logic_vector(31 downto 0)
+	);
+end component;
+
+component mux2t1_N is
+  port(
+	i_S         : in std_logic;
+	i_D0         : in std_logic_vector;
+	i_D1         : in std_logic_vector;
+	o_O          : out std_logic_vector
+	);
+end component;
+
+signal s_ALUOp 		: std_logic_vector(3 downto 0);
+signal s_shamt		: std_logic_vector(4 downto 0);
+signal s_A 		: std_logic_vector(31 downto 0);
+signal s_B 		: std_logic_vector(31 downto 0);
+signal s_imm 		: std_logic_vector(31 downto 0);
+signal s_muxSel 	: std_logic_vector(31 downto 0);
+signal s_out 		: std_logic_vector(31 downto 0);
+signal s_addOutput 	: std_logic_vector(31 downto 0);
+signal s_subOutput 	: std_logic_vector(31 downto 0);
+signal s_adduOutput	: std_logic_vector (31 downto 0);
+signal s_subuOutput	: std_logic_vector(31 downto 0);
+signal s_andOutput 	: std_logic_vector(31 downto 0);
+signal s_orOutput 	: std_logic_vector(31 downto 0);
+signal s_shiftOutput 	: std_logic_vector(31 downto 0);
+signal s_norOutput 	: std_logic_vector(31 downto 0);
+signal s_xorOutput 	: std_logic_vector(31 downto 0);
+signal s_shiftLeftOutput: std_logic_vector(31 downto 0);
+signal s_shiftRightLOutput:std_logic_vector(31 downto 0);
+signal s_shiftRightAOutput:std_logic_vector(31 downto 0);
+signal s_loadUpperOutput:std_logic_vector(31 downto 0);
+signal s_setLessThan 	: std_logic_vector(31 downto 0);
+signal s_carryOut 	: std_logic;
+signal s_carryOutForAddu : std_logic;
+signal s_zero 		: std_logic;
+signal s_overflow 	: std_logic;
+signal s_ALUsrc		: std_logic;
+signal s_dir		: std_logic;
+signal s_shiftType	: std_logic;
+signal s_outF		: std_logic_vector(31 downto 0);
+signal s_addOverflow 	: std_logic;
+signal s_adduOverflow 	: std_logic;
+signal s_subOverflow 	: std_logic;
+signal s_zeroBeq	: std_logic;
+signal s_zeroBne	: std_logic;
+
+
+
+
+begin
+
+
+
+
+s_A	<= iA;
+s_B	<= iB;
+s_imm	<= iImmediate;
+s_ALUOp	<= iALUOp;
+s_ALUsrc<= iALUsrc;
+s_shamt	<= iShamt;
+
+g_muxSel: mux2t1_N
+  port map(
+	o_O	=> s_muxSel,
+	i_D1	=> s_B,
+	i_D0	=> s_imm,
+	i_S	=> s_ALUsrc
+	);
+
+g_add : addSub_N
+  port map (
+	i_Ain			=> s_A,
+	i_Bin			=> s_muxSel,
+	i_nAdd_Sub		=> s_ALUOp(2),
+	o_Sum			=> s_addOutput,
+	o_Cout			=> s_carryOut,
+
+	o_ovrflw		=> s_addOverflow
+
+	);
+
+g_sub : addSub_N
+  port map (
+	i_Ain			=> s_A,
+	i_Bin			=> s_muxSel,
+	i_nAdd_Sub		=> '1',
+	o_Sum			=> s_subOutput,
+	o_Cout			=> s_carryOut,
+	o_ovrflw		=> s_overflow
+	);
+
+g_addu : addSub_N
+  port map (
+	i_Ain			=> s_A,
+	i_Bin			=> s_muxSel,
+	i_nAdd_Sub		=> '0',
+	o_Sum			=> s_adduOutput,
+	o_Cout			=> s_carryOutForAddu
+	);
+
+g_subu : addSub_N
+  port map (
+	i_Ain			=> s_A,
+	i_Bin			=> s_muxSel,
+	i_nAdd_Sub		=> '1',
+	o_Sum			=> s_subuOutput,
+	o_Cout			=> s_carryOut
+	);
+
+
+
+g_and_N : for i in 0 to 31 generate
+ g_AND: andg2
+  port map (
+	i_A     => s_A(i),
+       i_B      => s_muxSel(i),
+       o_F      => s_andOutput(i)
+	);
+end generate g_and_N;
+
+g_or_N : for i in 0 to 31 generate
+ g_OR :  org2 
+  port map(
+	i_A     => s_A(i),
+       i_B      => s_muxSel(i),
+       o_F      => s_orOutput(i)
+	);
+end generate g_or_N;
+
+g_nor_N : for i in 0 to 31 generate
+ g_NOR: norg2
+  port map(
+	i_A	=> s_A(i),
+	i_B    	=> s_muxSel(i),
+	o_F     => s_norOutput(i)
+	);
+end generate g_nor_N;
+
+g_xor_N : for i in 0 to 31 generate
+ g_XOR: xorg2
+  port map(
+	i_A	=> s_A(i),
+       i_B      => s_muxSel(i),
+       o_F      => s_xorOutput(i)
+	);
+end generate g_xor_N;
+	
+g_shiftLeft: barrelShifter
+  port map(
+	shiftDirection  => '0',
+	shiftType	=> '0',
+	dataInput	=> s_B,
+	shamt		=> s_shamt,
+	dataOutput	=> s_shiftLeftOutput
+	);
+
+g_loadUpper: barrelShifter
+  port map(
+	shiftDirection  => '0',
+	shiftType	=> '0',
+	dataInput	=> s_imm,
+	shamt		=> "10000",
+	dataOutput	=> s_loadUpperOutput
+	);
+
+g_shiftRightL: barrelShifter
+  port map(
+	shiftDirection  => '1',
+	shiftType	=> '0',
+	dataInput	=> s_B,
+	shamt		=> s_shamt,
+	dataOutput	=> s_shiftRightLOutput
+	);
+
+g_shiftRightA: barrelShifter
+  port map(
+	shiftDirection  => '1',
+	shiftType	=> '1',
+	dataInput	=> s_B,
+	shamt		=> s_shamt,
+	dataOutput	=> s_shiftRightAOutput
+	);
+
+
+  	--s_setLessThan <= X"00000001" when s_A < s_muxSel else X"00000000";
+
+	process(s_A, s_muxSel)
+	begin
+	if(s_A(31) = '1' and s_muxSel(31) = '0') then
+		s_setLessThan <= X"00000001";
+	elsif(s_A(31) = '0' and s_muxSel(31) = '1') then
+		s_setLessThan <= X"00000000";
+	elsif(s_A(31) = '0' and s_muxSel(31) = '0') then
+		if(s_A < s_muxSel) then
+			s_setLessThan <= X"00000001";
+		else
+			s_setLessThan <= X"00000000";
+		end if;
+	elsif(s_A(31) = '1' and s_muxSel(31) = '1') then
+		if(s_A < s_muxSel) then
+			s_setLessThan <= X"00000001";
+		else
+			s_setLessThan <= X"00000000";
+		end if;
+	end if;
+	end process;
+	
+/*
+	process(s_subOutput)
+	begin
+	if(s_subOutput > X"00000000") then
+		s_setLessThan <= X"00000000";
+	else
+		s_setLessThan <= X"00000001";
+	end if;
+	end process;
+*/
+	
+	-- "MUX"
+	with s_ALUOp select s_out <=
+	s_addOutput when "0010",
+	s_subOutput when "0110",
+	s_adduOutput when "1001",
+	s_subuOutput when "1101",
+	s_andOutput when "0000",
+	s_orOutput when "0001",
+	s_norOutput when "1100",
+	s_xorOutput when "1000",
+	s_setLessThan when "0111",
+	s_shiftLeftOutput when "1110",
+	s_shiftRightLOutput when "1111",
+	s_shiftRightAOutput when "0011",
+	s_loadUpperOutput when "0100",
+	X"00000000" when others;
+
+	oOverflow <= (ioverflowr and s_addOverflow) or (ioverflowi and s_addOverflow);
+
+
+/*
+	process(s_ALUOp)
+	begin
+	if(s_ALUOp(3 downto 1) = "111") then
+		s_shiftType 	<= s_ALUOp(0);
+		s_dir 		<= s_ALUOp(0);
+		outF 		<= s_shiftOutput;
+	end if;
+	end process;
+*/
+/*
+	s_zero <= '0';
+	process(s_subOutput, s_ALUOp)
+	begin
+	if(s_ALUOp = "0000") then
+		if(s_subOutput = X"00000000") then
+			s_zero <= '1';
+		else 
+			s_zero <= '0';
+		end if;
+	elsif(s_ALUOp = "0001") then
+		if(s_subOutput = X"00000000") then
+			s_zero <= '0';
+		else 
+			s_zero <= '1';
+		end if;
+	end if;
+	end process;
+*/
+	process(s_A, s_muxSel)
+	begin
+	if(s_A = s_muxSel) then
+		s_zeroBeq <= '1';
+		s_zeroBne <= '0';
+	else
+		s_zeroBeq <= '0';
+		s_zeroBne <= '1';
+	end if;
+	end process;
+
+	--s_zeroBeq <= (s_A = s_muxSel);
+	--s_zeroBne <= not (s_A = s_muxSel);	
+
+/*
+	with s_subOutput select s_zeroBeq <=
+	'1' when X"00000000",
+	'0' when others;
+	
+	with s_subOutput select s_zeroBne <=
+	'0' when X"00000000",
+	'1' when others;
+*/
+
+	with s_ALUOp select s_zero <=
+	s_zeroBeq when "0010",
+	s_zeroBne when "0110",
+	'0' when others;
+
+
+	--process (s_ALUOp)
+	--begin 
+	--case s_ALUOp is 
+	--when "0010" => 
+	--oOverflow <= s_addOverflow;
+
+	--when "0110" => 
+	--oOverflow <= s_addOverflow;
+
+	--when "1001" =>
+	--oOverflow <= s_addOverflow;
+
+	--when "1101" => 
+	--oOverflow <= s_addOverflow;
+
+	--when others => 
+	--oOverflow <= '0';
+
+	--end case;
+	--end process;
+
+
+
+
+	--process(s_ALUOp )
+	--begin
+	--if(s_ALUOp = "0010" or s_ALUOp = "0110" or s_ALUOp = "1001" or s_ALUOp = "1101" ) then
+	--	oOverflow <= s_overflow;
+		
+	--	if(s_outF = x"00000000")  then
+	--	s_zero <= '0';
+	--	else 
+	--	
+	--	end if ;
+		
+	--else 
+		
+	--	s_zero <= '1';
+	--	oOverflow <= '0';
+	--end if;
+	--end process;
+
+	-- process (s_A, s_B, s_addOutput)
+	-- begin 
+	-- if (((s_A(31) = '1' and s_B(31) = '1' ) and (s_addOutput(31) ='0'))or ((s_A(31) = '0' and s_B(31) = '0') and (s_addOutput(31) = '1')) ) then
+	-- 	s_overflow <= '1';
+	-- else 
+	-- 	s_overflow <= '0';
+	-- end if;
+	-- end process;
+
+	-- process (s_A, s_B, s_subOutput)
+	-- begin 
+	-- if (((s_A(31) = '0' and s_B(31) = '1' ) and (s_subOutput(31) ='1'))or ((s_A(31) = '1' and s_B(31) = '0') and (s_subOutput(31) = '0')) ) then
+	-- 	s_overflow <= '1';
+	-- else 
+	-- 	s_overflow <= '0';
+	-- end if;
+	-- end process;
+
+
+	-- process (s_A, s_B, s_carryOutForAddu)
+	-- begin 
+	-- if (s_carryOutForAddu = '1' ) then
+	-- 	s_overflow <= '1';
+	-- else 
+	-- 	s_overflow <= '0';
+	-- end if;
+	-- end process;
+
+	
+
+	
+	 outF		<= s_out;
+	oCarryout	<= s_carryOut;
+	--oOverflow	<= s_overflow;
+	oZero		<= s_zero;
+	
+	
+end structural;
